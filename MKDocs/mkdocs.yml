@@ -1,0 +1,89 @@
+site_name: Documentación Técnica del Equipo de Desarrollo
+site_description: Fuente central de verdad para arquitectura, guías y referencias de API.
+site_url: https://docs.tudominio.com # Cambia esto por tu URL de despliegue
+
+# ----------------------------------------------------
+# 1. Configuración del Tema
+# ----------------------------------------------------
+
+theme:
+  name: material
+  custom_dir: docs/overrides # Opcional: para customizar plantillas
+  language: es
+  features:
+    # Activa la tabla de contenidos en el lateral derecho
+    - navigation.toc
+    # Permite colapsar secciones de la navegación lateral
+    - navigation.sections
+    # Pestañas en la navegación superior (si usas encabezados de primer nivel)
+    # - navigation.tabs 
+    # Muestra el "última actualización" en el pie de página
+    - content.action.edit
+    # Permite el uso de tarjetas (grid cards)
+    - content.tabs.link
+    
+  palette:
+    # 1. Tema por defecto (Claro)
+    - scheme: default
+      primary: indigo # Color principal (barra superior, etc.)
+      accent: deep purple # Color de acento (enlaces, scrollbar, etc.)
+      toggle:
+        icon: material/brightness-7 # Icono de sol (para cambiar a oscuro)
+        name: Cambiar a modo oscuro
+    
+    # 2. Tema Oscuro
+    - scheme: slate
+      primary: deep purple
+      accent: indigo
+      toggle:
+        icon: material/brightness-4 # Icono de luna (para cambiar a claro)
+        name: Cambiar a modo claro
+
+  icon:
+    logo: material/rocket-launch # Icono que aparece al lado del título
+
+# ----------------------------------------------------
+# 2. Navegación (Tabla de Contenido)
+# ----------------------------------------------------
+nav:
+  - '🚀 Inicio': index.md
+  - 'APIs': api/index.md
+  - '🧭 Guías de Desarrollo':
+    - 'Comenzar (Setup)': guides/setup.md
+    - 'Flujo de Trabajo Git': guides/git-flow.md
+    - 'Tests Unitarios': guides/testing.md
+  - '🏗️ Arquitectura':
+    - 'Visión General': architecture/overview.md
+    - 'Servicios Principales': architecture/services.md
+  - '⚙️ Estándares':
+    - 'Estándares de Código': standards/coding.md
+    - 'Nomenclatura': standards/naming.md
+
+
+# ----------------------------------------------------
+# 3. Extensiones de Markdown
+# ----------------------------------------------------
+markdown_extensions:
+  - attr_list # Necesario para las "grid cards"
+  - md_in_html # Permite usar Markdown dentro de HTML (como en las grid cards)
+  - admonition # Permite los bloques !!! note, !!! warning, etc.
+  - pymdownx.highlight: # Resaltado de código avanzado
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.emoji: # Soporte para emojis y iconos
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.details # Para bloques desplegables (acordeones)
+  - pymdownx.superfences # Necesario para los bloques de código y las grid cards
+  - pymdownx.tabbed: # Para usar pestañas dentro del contenido
+      alternate_style: true
+  - toc: # Tabla de contenido
+      permalink: true
+
+# ----------------------------------------------------
+# 4. Plugins (Recomendados)
+# ----------------------------------------------------
+plugins:
+  - search:
+      lang: es # Optimiza la búsqueda para español

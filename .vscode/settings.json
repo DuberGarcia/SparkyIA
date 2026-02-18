@@ -1,0 +1,8 @@
+{
+  "yaml.customTags": [
+    "!!python/name:material.extensions.emoji.twemoji scalar",
+    "!!python/name:material.extensions.emoji.to_svg scalar",
+    "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji scalar",
+    "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg scalar"
+  ]
+}

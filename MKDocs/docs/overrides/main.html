@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+{{ super() }}
+<div id="chat-container" style="position:fixed;bottom:20px;right:20px;width:300px;background:#fff;border:1px solid #ccc;">
+    <h2>Sparky</h2>
+    <div id="chat-messages" style="height:200px;overflow-y:auto;border:1px solid #ddd;margin-bottom:10px;"></div>
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." style="width:80%;">
+    <button id="chat-send">Enviar</button>
+</div>
+
+<script>
+document.getElementById('chat-send').addEventListener('click', async () => {
+    const pregunta = document.getElementById('chat-input').value;
+    if (!pregunta) return;
+    
+    document.getElementById('chat-input').value = '';
+
+    // Mostrar mensaje del usuario
+    const chatBox = document.getElementById('chat-messages');
+    chatBox.innerHTML += `<div><b>Tú:</b> ${pregunta}</div>`;
+
+    // Llamar al backend FastAPI
+    try {
+        const response = await fetch(`http://localhost:5000/consulta`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pregunta: pregunta })
+        });
+        const data = await response.json();
+
+        // Mostrar respuesta del agente
+        chatBox.innerHTML += `<div><b>Sparky:</b> ${data.response}</div>`;
+    } catch (error) {
+        console.log(error);
+        
+        chatBox.innerHTML += `<div style="color:red;">Error al conectar con el backend</div>`;
+    }
+});
+</script>
+{% endblock %}
+
+
